@@ -1,10 +1,11 @@
 # Changes here will be overwritten by Copier; do not edit by hand.
-_commit: v0.1.0
+_commit: v0.2.0
 _src_path: /home/downey/PublicDataToolkit
 citation: Bureau of Labor Statistics, U.S. Department of Labor. National Longitudinal
     Survey of Youth 1997 cohort, 1997-2023 (rounds 1-21). Produced and distributed
     by the Center for Human Resource Research (CHRR), The Ohio State University. Columbus,
     OH.
+copyright_holder: Allen Downey
 dataset_id: nlsy97
 dataset_url: https://www.nlsinfo.org/content/cohorts/nlsy97
 description: BLS's panel survey of about 9,000 people born in 1980-84, interviewed

@@ -1,6 +1,6 @@
 {
  "pdt_version": "0.2.0",
- "inputs_sha256": "55471dc90834cb6af35982bca361971ff18035ba66a1580b2234421c105261e2",
+ "inputs_sha256": "33ac0a97fee3d0f190d6b23a954600e45fc08ba514eb18fad862e3a2326e4eab",
  "generator_sha256": "5bd837fcfa83e3bb04c37847b6e1662f093b130380ce5a4ef1067334b670c30d",
  "dataset": "nlsy97",
  "spec": "0.1.0",

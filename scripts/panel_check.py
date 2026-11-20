@@ -18,7 +18,7 @@ EXPECTED = {2005: (8377, 5075), 2010: (7784, 4653), 2012: (1752, 33)}   # measur
 
 
 def main():
-    p = Panel(ROOT, month_zero=(1979, 12))   # NLS continuous months: January 1980 = 1
+    p = Panel(ROOT)   # month 0 from dataset.yaml panel.month_zero (NLS: January 1980 = 1)
     people = sorted(p._by_person)
     ok = True
     for year, (want1, want2) in EXPECTED.items():

@@ -35,7 +35,8 @@ panel:
   interview_date: [CV_INTERVIEW_CMONTH]
   age_at_interview: CV_AGE_INT_DATE
   noninterview: RNI
-  note: CV_INTERVIEW_CMONTH is the interview month in NLS's continuous month scheme (January 1980 = 1;
+  month_zero: "1979-12"
+  note: CV_INTERVIEW_CMONTH is the interview month in NLS's continuous month scheme (January 1980 = 1, so month 0 is 1979-12;
     Codebook Supplement, Appendix 7). In a round without an interview, every variable has -5, and RNI gives
     the reason. All four are in the person_year table.
 dimensions:

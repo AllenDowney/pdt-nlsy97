@@ -1,0 +1,17 @@
+# Every file this repo depends on (STANDARD.md §2.2): data files, codebooks,
+# questionnaires, release notes, errata and terms pages, upstream packages.
+# Schema: PublicDataToolkit/schema/sources.schema.json. Edited by hand.
+#
+# Once a file is fetched, fill fetched_on, bytes and sha256 (pdt check C6).
+# An upstream package also needs `version` (a tag or commit), and documentation
+# says which releases it `documents`.
+sources:
+  - id: nlsy97-all-1997-2023
+    title: "NLSY97 cohort data, 1997-2023 (rounds 1-21), data"
+    kind: data
+    format: csv
+    url: "https://nlsinfo.org/cohort-data/nlsy97_all_1997-2023.zip"
+    path: data/raw/CHANGE-ME
+    releases: ["1997-2023"]
+    redistribution: unknown
+    acquisition: automated

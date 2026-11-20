@@ -1,0 +1,26 @@
+# Changes here will be overwritten by Copier; do not edit by hand.
+_commit: v0.1.0
+_src_path: /home/downey/PublicDataToolkit
+citation: Bureau of Labor Statistics, U.S. Department of Labor. National Longitudinal
+    Survey of Youth 1997 cohort, 1997-2023 (rounds 1-21). Produced and distributed
+    by the Center for Human Resource Research (CHRR), The Ohio State University. Columbus,
+    OH.
+dataset_id: nlsy97
+dataset_url: https://www.nlsinfo.org/content/cohorts/nlsy97
+description: BLS's panel survey of about 9,000 people born in 1980-84, interviewed
+    annually from 1997 to 2011 and every two years since; managed by CHRR at The Ohio
+    State University, interviews by NORC.
+form_label: ''
+publisher_name: U.S. Bureau of Labor Statistics (BLS); produced and distributed by
+    the Center for Human Resource Research (CHRR), The Ohio State University
+publisher_url: https://www.nlsinfo.org/
+release_id: 1997-2023
+release_label: NLSY97 cohort data, 1997-2023 (rounds 1-21)
+source_format: csv
+source_id: nlsy97-all-1997-2023
+source_kind: data
+source_url: https://nlsinfo.org/cohort-data/nlsy97_all_1997-2023.zip
+standard_version: '0.1'
+terms_url: https://www.nlsinfo.org/system-use-notification
+title: National Longitudinal Survey of Youth 1997 (NLSY97)
+wave_label: round

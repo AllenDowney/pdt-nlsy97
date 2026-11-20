@@ -1,0 +1,32 @@
+# The dataset, its terms and its releases (STANDARD.md §2.1, §8).
+# Schema: PublicDataToolkit/schema/dataset.schema.json. Edited by hand.
+standard_version: "0.1"
+id: nlsy97
+title: "National Longitudinal Survey of Youth 1997 (NLSY97)"
+publisher:
+  name: "U.S. Bureau of Labor Statistics (BLS); produced and distributed by the Center for Human Resource Research (CHRR), The Ohio State University"
+  url: "https://www.nlsinfo.org/"
+url: "https://www.nlsinfo.org/content/cohorts/nlsy97"
+description: "BLS\u0027s panel survey of about 9,000 people born in 1980-84, interviewed annually from 1997 to 2011 and every two years since; managed by CHRR at The Ohio State University, interviews by NORC."
+citation: "Bureau of Labor Statistics, U.S. Department of Labor. National Longitudinal Survey of Youth 1997 cohort, 1997-2023 (rounds 1-21). Produced and distributed by the Center for Human Resource Research (CHRR), The Ohio State University. Columbus, OH."
+# Terms are decided by a person, never by an agent or this template (STANDARD.md §8).
+# Quote what the terms pages say in `summary`, then have a person set each field
+# to ship or build-only and fill reviewed_by and reviewed_on. `unknown` blocks
+# shipping anything that depends on it.
+terms:
+  url: "https://www.nlsinfo.org/system-use-notification"
+  summary: Not yet reviewed.
+  data: unknown
+  documentation: unknown
+  metadata: unknown
+  llm_processing: unknown
+dimensions:
+  wave:
+    label: "round"
+releases:
+  - id: "1997-2023"
+    label: "NLSY97 cohort data, 1997-2023 (rounds 1-21)"
+    status: current
+    sources: [nlsy97-all-1997-2023]
+    # A release with several data files lists `tables`, each with an id, label,
+    # sources, key and references (STANDARD.md §2.1). Examples: pdt-nsfg, pdt-fars.

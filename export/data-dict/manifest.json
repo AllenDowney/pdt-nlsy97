@@ -1,6 +1,6 @@
 {
  "pdt_version": "0.1.0",
- "inputs_sha256": "74aec2c0497d0352601afae27bcb8fa6b4bbb8590322987ea4ea0eaa1802f792",
+ "inputs_sha256": "55471dc90834cb6af35982bca361971ff18035ba66a1580b2234421c105261e2",
  "generator_sha256": "7c29f5945fadc171bc664203116efd00082cd4b98f57874b1976eaa49a1d5798",
  "dataset": "nlsy97",
  "spec": "0.1.0",
@@ -13,7 +13,7 @@
    "release_version": 1,
    "variables": 397,
    "availability": 661,
-   "provenance_fields": 2393,
+   "provenance_fields": 2407,
    "missing_codes": 1895,
    "numeric_code_labels": 386,
    "wordings": 6,

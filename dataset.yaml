@@ -30,6 +30,14 @@ terms:
   reviewed_by: Allen Downey
   reviewed_on: '2026-11-20'
   notice: "Source: Bureau of Labor Statistics, U.S. Department of Labor, National Longitudinal Survey of Youth 1997 cohort, public-use data, rounds 1-21. Cite as NLS suggests: https://www.nlsinfo.org/bibliography/citing-nls-data."
+panel:
+  id: PUBID
+  interview_date: [CV_INTERVIEW_CMONTH]
+  age_at_interview: CV_AGE_INT_DATE
+  noninterview: RNI
+  note: CV_INTERVIEW_CMONTH is the interview month in NLS's continuous month scheme (January 1980 = 1;
+    Codebook Supplement, Appendix 7). In a round without an interview, every variable has -5, and RNI gives
+    the reason. All four are in the person_year table.
 dimensions:
   wave:
     label: survey year

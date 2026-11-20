@@ -21,7 +21,7 @@ A record is a question name. Its `availability` lists the years it was asked, `q
 
 ### Answers spread across rounds
 
-A person's answer about a year, or at an age, can be in a different round than the obvious one: rounds went from annual to every two years, people miss rounds and come back, and many questions ask about the time since the last interview. [`AGENT_NOTES.md`](AGENT_NOTES.md) says how NLS's data work, what NLS recommends (interview dates, created variables, event history arrays), and how often it happens in this slice. It's also in `agent/SKILL.md`.
+A person's answer about a year, or at an age, can be in a different round than the obvious one: rounds went from annual to every two years, people miss rounds and come back, and many questions ask about the time since the last interview. [`AGENT_NOTES.md`](AGENT_NOTES.md) says how NLS's data work, what NLS recommends (interview dates, created variables, event history arrays), and how often it happens in this slice. It's also in `agent/SKILL.md`. With the PublicDataToolkit library, `pdt.panel` lists every round's answer that could be a person's answer about a year or at an age, each with its round, reference period and overlap or distance, and never chooses among them; `pick` applies a policy you name.
 
 ## Terms of use
 

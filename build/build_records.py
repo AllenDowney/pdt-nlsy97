@@ -17,6 +17,7 @@ A record is a question name; each survey year's entry for it is one codebook ent
 - missing types of the reserved codes: rule nlsy_reserved_codes, from NLS's labels
 - measure: build/slice.yaml (hand)
 - SURVEY_YEAR, the person_year table's year: rule nlsy_reshape
+- questions[].reference_period: rule nlsy_reference_period, from explicit phrases in the text
 """
 
 import collections
@@ -85,6 +86,24 @@ def tokens_by_column():
     return {c: collections.Counter(wide[c]) for c in wide.columns}, len(wide)
 
 
+# Rule nlsy_reference_period: the period a wording states, from explicit phrases only. A wording
+# with none ("In general, how is your health?") gets no reference_period.
+PERIODS = [(re.compile(r"since (the )?last interview", re.I), "since_last_interview", None),
+           (re.compile(r"(within|during|in) the past twelve months|past 12 months", re.I), "past_months", 12),
+           (re.compile(r"(past|last) 30 days", re.I), "past_30_days", None),
+           (re.compile(r"during the (last|past) month", re.I), "past_months", 1),
+           (re.compile(r"\bhave you ever\b", re.I), "ever", None),
+           (re.compile(r"as of (the )?(survey|interview) date", re.I), "as_of_interview", None),
+           (re.compile(r"in the previous year", re.I), "calendar_year", None)]
+
+
+def reference_period(text):
+    for pattern, kind, months in PERIODS:
+        if pattern.search(text):
+            return kind, months
+    return None
+
+
 def is_valid_token(t):
     """Not empty and not one of NLS's reserved codes -1 to -5 (other negatives, such as a family
     income below -$2,999, are values)."""
@@ -113,7 +132,19 @@ def build_record(name, table, entries, measure, spec, tokens):
         if e["text"] and not e["text"].startswith("COMMENT:"):
             wordings.setdefault(" ".join(e["text"].split()), []).append(e["year"])
     if wordings:
-        record["questions"] = [{"text": t, "waves": y} for t, y in wordings.items()]
+        record["questions"] = []
+        for t, y in wordings.items():
+            q = {"text": t, "waves": y}
+            period = reference_period(t)
+            if period:
+                q["reference_period"] = period[0]
+                if period[1]:
+                    q["months"] = period[1]
+            record["questions"].append(q)
+        if any("reference_period" in q for q in record["questions"]):
+            fields["questions"] = {"origin": "publisher", "source": CODEBOOK,
+                                   "note": "Text from the codebook; reference_period from the text by rule "
+                                           f"nlsy_reference_period {RULE_VERSION} (STANDARD.md §4.1)."}
     notes += sorted({" ".join(e["text"][len("COMMENT:"):].split()) for e in es if e["text"].startswith("COMMENT:")})
     universes = collections.OrderedDict()
     for e in es:

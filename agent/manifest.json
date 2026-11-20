@@ -1,7 +1,7 @@
 {
  "pdt_version": "0.1.0",
  "inputs_sha256": "55471dc90834cb6af35982bca361971ff18035ba66a1580b2234421c105261e2",
- "generator_sha256": "7c29f5945fadc171bc664203116efd00082cd4b98f57874b1976eaa49a1d5798",
+ "generator_sha256": "feed02ead6fb62dd3ce5164d7c62ab1bc77fefdf83e06a7164b95afa87aba2cf",
  "dataset": "nlsy97",
  "max_tokens": 20000,
  "shards": [

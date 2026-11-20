@@ -19,6 +19,10 @@ NLS publishes the cohort as one wide file: one column per *reference number*, an
 
 A record is a question name. Its `availability` lists the years it was asked, `questions` each wording with its years, and `source_columns` its reference number in each year. A year in which a question wasn't in the file is empty in `person_year`; a year in which the respondent wasn't interviewed has NLS's code -5.
 
+### Answers spread across rounds
+
+A person's answer about a year, or at an age, can be in a different round than the obvious one: rounds went from annual to every two years, people miss rounds and come back, and many questions ask about the time since the last interview. [`AGENT_NOTES.md`](AGENT_NOTES.md) says how NLS's data work, what NLS recommends (interview dates, created variables, event history arrays), and how often it happens in this slice. It's also in `agent/SKILL.md`.
+
 ## Terms of use
 
 Allen Downey reviewed the terms on 2026-11-20: the metadata, the documentation and the common-format data ship, with this notice:

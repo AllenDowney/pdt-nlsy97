@@ -25,6 +25,9 @@ tables:
   person_year:
     PUBID: identifier
     SAMPLING_WEIGHT_CC: weight
+    RNI: categorical                       # Task 69: reason for non-interview, each year
+    CV_INTERVIEW_CMONTH: continuous        # Task 69: interview month (continuous months, Jan 1980 = 1)
+    CV_AGE_INT_DATE: continuous            # Task 69: age at the interview
     CV_HGC_EVER_EDT: ordinal
     CV_INCOME_FAMILY: continuous
     CV_MARSTAT_COLLAPSED: categorical      # Task 69: status as of each interview
@@ -39,3 +42,10 @@ tables:
     YSAQ-360C: categorical                 # Task 69: "smoked since the last interview"
     YSAQ-361: count
     YSAQ-363: categorical
+
+# Event history arrays (NLSY97 Codebook Supplement, Appendix 6): one variable per month, asked of
+# no one, created by NLS from the questions. Each becomes a person-level record, and the array a
+# group. MAR_STATUS: marital/cohabitation status by month, January 1994 to September 2024.
+arrays:
+  person:
+    MAR_STATUS: categorical

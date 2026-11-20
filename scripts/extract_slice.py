@@ -23,9 +23,9 @@ OUT = ROOT / "data/interim/slice_wide.csv"
 def columns():
     sys.path.insert(0, str(ROOT / "build"))
     import yaml
-    from build_records import slice_cdb  # copies the slice's codebook entries to data/interim/slice.cdb
+    from build_records import slice_cdb, slice_names  # copies the slice's codebook entries to data/interim/slice.cdb
     spec = yaml.safe_load((ROOT / "build/slice.yaml").read_text())
-    slice_cdb({n for t in spec["tables"].values() for n in t})
+    slice_cdb(slice_names(spec))
     heads = re.findall(r"^([A-Z]\d{5})\.(\d{2}) +\[", (ROOT / "data/interim/slice.cdb").read_text(), re.M)
     return [a + b for a, b in heads]
 

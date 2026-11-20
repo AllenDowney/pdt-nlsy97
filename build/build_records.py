@@ -60,10 +60,23 @@ def slice_cdb(names):
             line = raw.decode("latin-1")
             m = head.match(line)
             if m:
-                keep = m.group(1) in names
+                keep = m.group(1) in names or any(
+                    n.startswith("__prefix__") and m.group(1).startswith(n[len("__prefix__"):] + "_") for n in names)
             if keep:
                 w.write(line)
     return out
+
+
+GROUPS = []
+ARRAY_HEAD = re.compile(r"^([A-Z][A-Z_]*?)_\d{4}\.\d{2}$")
+
+
+def slice_names(spec):
+    """The question names to copy out of the codebook: the tables' names, and for each array prefix,
+    every name that starts with it (prefix_YYYY.MM)."""
+    names = {n for t in spec["tables"].values() for n in t}
+    prefixes = {p for arrays in (spec.get("arrays") or {}).values() for p in arrays}
+    return names | {f"__prefix__{p}" for p in prefixes}
 
 
 def tokens_by_column():
@@ -73,7 +86,9 @@ def tokens_by_column():
 
 
 def is_valid_token(t):
-    return t != "" and not t.startswith("-")
+    """Not empty and not one of NLS's reserved codes -1 to -5 (other negatives, such as a family
+    income below -$2,999, are values)."""
+    return t not in ("", "-1", "-2", "-3", "-4", "-5")
 
 
 def years_text(years):
@@ -103,15 +118,20 @@ def build_record(name, table, entries, measure, spec, tokens):
     universes = collections.OrderedDict()
     for e in es:
         universes.setdefault(e["universe"], []).append(e["year"])
-    if len(universes) == 1 and next(iter(universes)):
-        record["universe"] = next(iter(universes))
-    elif len(universes) > 1:
-        notes.append("Universe by year: " + "; ".join(f"{u or '(none stated)'} ({years_text(y)})"
-                                                     for u, y in universes.items()))
+    stated = [(u, y) for u, y in universes.items() if u]
+    if len(universes) == 1 and stated:
+        record["universe"] = stated[0][0]
+    elif stated:  # a universe by wave (STANDARD.md §4.1); years whose entry states none are left out
+        record["universe"] = [{"text": u, "waves": y} for u, y in stated]
+        if len(stated) < len(universes):
+            notes.append("The codebook states no universe for " + years_text(universes.get("", [])) + ".")
     # Codes: the latest year's label; n is the codebook's count summed over the years, which is the
     # count in the long table.
     values, counts, lows, highs, relabeled = {}, collections.Counter(), [], [], []
+    by_wave = collections.defaultdict(list)   # code -> [{wave, n}], the codebook's count in each year
     for e in es:
+        for code, (_, n) in e["reserved"].items():
+            by_wave[code].append({"wave": e["year"], "n": n})
         for n, code, label in e["rows"]:
             if isinstance(code, tuple):
                 lows.append(code[0])
@@ -126,15 +146,18 @@ def build_record(name, table, entries, measure, spec, tokens):
                 relabeled.append(f"{code}: '{values[code]}' -> '{label}' ({e['year']})")
             values[code] = label
             counts[code] += n
+            by_wave[code].append({"wave": e["year"], "n": n})
     reserved_n = collections.Counter()
     for e in es:
         for code, (_, n) in e["reserved"].items():
             reserved_n[code] += n
-    out_values = [{"code": c, "label": l, "kind": "valid", "n": counts[c]} for c, l in values.items()]
+    spans = len(es) > 1
+    out_values = [dict({"code": c, "label": l, "kind": "valid", "n": counts[c]},
+                       **({"counts": by_wave[c]} if spans else {})) for c, l in values.items()]
     for code, (label, types, note) in RESERVED.items():
         if code in reserved_n:
             out_values.append({"code": code, "label": label, "kind": "missing", "missing_types": types,
-                               "n": reserved_n[code],
+                               "n": reserved_n[code], **({"counts": by_wave[code]} if spans else {}),
                                "origin": {"origin": "rule", "rule": "nlsy_reserved_codes", "rule_version": RULE_VERSION,
                                           "source": CODEBOOK,
                                           "note": "NLS reserves -1 to -5 and counts them under every entry; the type "
@@ -142,7 +165,7 @@ def build_record(name, table, entries, measure, spec, tokens):
     record["values"] = out_values
     fields["values"] = {"origin": "publisher", "source": CODEBOOK,
                         "note": "The codebook's codes and labels (the latest year's label, without routing such as "
-                                "'(Go To R21895.00)'); n is the codebook's count summed over the years."}
+                                "'(Go To R21895.00)'); counts are the codebook's count in each year, n their sum."}
     if relabeled:
         notes.append("Labels that differ by year (beyond case): " + "; ".join(relabeled))
     if lows:
@@ -167,7 +190,7 @@ def build_record(name, table, entries, measure, spec, tokens):
                                 "note": "Each year's reference number (R03206.00 is column R0320600)."}
     record["availability"] = [{"wave": e["year"], "n": sum(k for t, k in tokens[e["column"]].items() if is_valid_token(t))}
                               for e in es]
-    fields["availability"] = {"origin": "data_file", "source": DATA, "note": "n counts values that aren't negative codes."}
+    fields["availability"] = {"origin": "data_file", "source": DATA, "note": "n counts values that aren't empty or NLS's reserved codes -1 to -5."}
     if notes:
         record["notes"] = "\n".join(notes)
     record["source_location"] = {"source": CODEBOOK, "anchor": last["rnum"]}
@@ -206,10 +229,21 @@ def check_codes(record, entries, tokens):
 
 def main():
     spec = yaml.safe_load((ROOT / "build" / "slice.yaml").read_text())
-    names = {n for t in spec["tables"].values() for n in t}
+    names = slice_names(spec)
     by_name = collections.defaultdict(list)
     for e in nlsy_cdb.entries(slice_cdb(names)):
         by_name[e["name"]].append(e)
+    for table, arrays in (spec.get("arrays") or {}).items():
+        for prefix, measure in arrays.items():
+            members = sorted(n for n in by_name if n.startswith(prefix + "_"))
+            spec["tables"][table].update({n: measure for n in members})
+            GROUPS.append({"id": f"array-{prefix.lower().replace('_', '-')}", "kind": "other",
+                           "label": f"{prefix}: an NLS event history array ({len(members)} monthly variables)",
+                           "members": [{"release": spec["release"], "table": table, "name": n} for n in members],
+                           "ordered": True,
+                           "origin": {"origin": "publisher", "source": CODEBOOK,
+                                      "note": "NLSY97 Codebook Supplement, Appendix 6: Event History Creation and "
+                                              "Documentation; one variable per month."}})
     tokens, persons = tokens_by_column()
     years = sorted({e["year"] for n in spec["tables"]["person_year"] for e in by_name[n] if isinstance(e["year"], int)})
     problems, report, total = [], [], 0
@@ -230,6 +264,7 @@ def main():
         write_jsonl(META / "releases" / spec["release"] / table / "variables.jsonl", records)
         report += [f"## {table}", "", f"- {len(records)} records", ""]
         total += len(records)
+    write_jsonl(META / "groups.jsonl", GROUPS)
     lines = [f"# Build report: {DATASET}, release {spec['release']}", "",
              "Generated by `build/build_records.py`. Do not edit.", "", f"- Records: {total}",
              f"- Respondents: {persons:,}; survey years: {years_text(years)}", ""] + report

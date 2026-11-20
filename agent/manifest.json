@@ -1,7 +1,7 @@
 {
  "pdt_version": "0.1.0",
- "inputs_sha256": "31f48902311da172120741625f186fcd26bc8ea823573635a87a52a286dcbfc7",
- "generator_sha256": "9ccfde4fa108cb2b4d7e1cdf675082febafe78bc8e89a2be78db6a98e3a26059",
+ "inputs_sha256": "74aec2c0497d0352601afae27bcb8fa6b4bbb8590322987ea4ea0eaa1802f792",
+ "generator_sha256": "7c29f5945fadc171bc664203116efd00082cd4b98f57874b1976eaa49a1d5798",
  "dataset": "nlsy97",
  "max_tokens": 20000,
  "shards": [
@@ -20,22 +20,70 @@
    "releases": [
     "1997-2023"
    ],
-   "n_in_scope": 8,
+   "n_in_scope": 377,
    "rule_versions": {},
    "notes": [],
-   "count": 8,
+   "count": 377,
    "files": [
     {
-     "path": "shards/table/1997-2023-person.jsonl",
+     "path": "shards/table/1997-2023-person.part1.jsonl",
      "form": "jsonl",
-     "variables": 8,
-     "tokens": 2966
+     "variables": 47,
+     "tokens": 19510
+    },
+    {
+     "path": "shards/table/1997-2023-person.part2.jsonl",
+     "form": "jsonl",
+     "variables": 45,
+     "tokens": 19337
+    },
+    {
+     "path": "shards/table/1997-2023-person.part3.jsonl",
+     "form": "jsonl",
+     "variables": 43,
+     "tokens": 19403
+    },
+    {
+     "path": "shards/table/1997-2023-person.part4.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19251
+    },
+    {
+     "path": "shards/table/1997-2023-person.part5.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19259
+    },
+    {
+     "path": "shards/table/1997-2023-person.part6.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19270
+    },
+    {
+     "path": "shards/table/1997-2023-person.part7.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19282
+    },
+    {
+     "path": "shards/table/1997-2023-person.part8.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19274
+    },
+    {
+     "path": "shards/table/1997-2023-person.part9.jsonl",
+     "form": "jsonl",
+     "variables": 22,
+     "tokens": 9657
     },
     {
      "path": "shards/table/1997-2023-person.txt",
      "form": "txt",
-     "variables": 8,
-     "tokens": 421
+     "variables": 377,
+     "tokens": 14012
     }
    ]
   },
@@ -54,22 +102,109 @@
    "releases": [
     "1997-2023"
    ],
-   "n_in_scope": 17,
+   "n_in_scope": 20,
    "rule_versions": {},
    "notes": [],
-   "count": 17,
+   "count": 20,
    "files": [
     {
-     "path": "shards/table/1997-2023-person-year.jsonl",
+     "path": "shards/table/1997-2023-person-year.part1.jsonl",
      "form": "jsonl",
-     "variables": 17,
-     "tokens": 9750
+     "variables": 11,
+     "tokens": 18993
+    },
+    {
+     "path": "shards/table/1997-2023-person-year.part2.jsonl",
+     "form": "jsonl",
+     "variables": 9,
+     "tokens": 8298
     },
     {
      "path": "shards/table/1997-2023-person-year.txt",
      "form": "txt",
-     "variables": 17,
-     "tokens": 990
+     "variables": 20,
+     "tokens": 1112
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "title": "other: MAR_STATUS: an NLS event history array (369 monthly variables)",
+   "basis": "members of group array-mar-status (origin publisher)",
+   "full_records": [
+    "metadata/releases/1997-2023/person/variables.jsonl"
+   ],
+   "completeness": "complete",
+   "filter": {
+    "group": "array-mar-status"
+   },
+   "releases": [
+    "1997-2023"
+   ],
+   "n_in_scope": 397,
+   "rule_versions": {},
+   "notes": [],
+   "count": 369,
+   "files": [
+    {
+     "path": "shards/group/array-mar-status.part1.jsonl",
+     "form": "jsonl",
+     "variables": 45,
+     "tokens": 19219
+    },
+    {
+     "path": "shards/group/array-mar-status.part2.jsonl",
+     "form": "jsonl",
+     "variables": 45,
+     "tokens": 19406
+    },
+    {
+     "path": "shards/group/array-mar-status.part3.jsonl",
+     "form": "jsonl",
+     "variables": 43,
+     "tokens": 19420
+    },
+    {
+     "path": "shards/group/array-mar-status.part4.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19264
+    },
+    {
+     "path": "shards/group/array-mar-status.part5.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19274
+    },
+    {
+     "path": "shards/group/array-mar-status.part6.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19284
+    },
+    {
+     "path": "shards/group/array-mar-status.part7.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19293
+    },
+    {
+     "path": "shards/group/array-mar-status.part8.jsonl",
+     "form": "jsonl",
+     "variables": 44,
+     "tokens": 19286
+    },
+    {
+     "path": "shards/group/array-mar-status.part9.jsonl",
+     "form": "jsonl",
+     "variables": 16,
+     "tokens": 7057
+    },
+    {
+     "path": "shards/group/array-mar-status.txt",
+     "form": "txt",
+     "variables": 369,
+     "tokens": 13727
     }
    ]
   }

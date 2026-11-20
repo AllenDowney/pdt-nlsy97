@@ -89,6 +89,10 @@ releases:
     design:
       weights:
       - SAMPLING_WEIGHT_CC
+      strata: VSTRAT
+      psu: VPSU
+      table: person
+      key: [PUBID]
       note: 'SAMPLING_WEIGHT_CC is each year''s cross-sectional weight (the codebook: ''ROUND n SAMPLING WEIGHT
         CUMULATIVE CASES METHOD''), with 2 implied decimal places. The variance stratum and PSU, VSTRAT and VPSU,
-        are in the person table; join on PUBID. design can''t name strata or a PSU in another table.'
+        are per person, in the person table; join on PUBID.'

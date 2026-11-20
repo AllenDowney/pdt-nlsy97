@@ -1,7 +1,7 @@
 {
  "pdt_version": "0.1.0",
- "inputs_sha256": "31f48902311da172120741625f186fcd26bc8ea823573635a87a52a286dcbfc7",
- "generator_sha256": "9ccfde4fa108cb2b4d7e1cdf675082febafe78bc8e89a2be78db6a98e3a26059",
+ "inputs_sha256": "74aec2c0497d0352601afae27bcb8fa6b4bbb8590322987ea4ea0eaa1802f792",
+ "generator_sha256": "7c29f5945fadc171bc664203116efd00082cd4b98f57874b1976eaa49a1d5798",
  "dataset": "nlsy97",
  "spec": "0.1.0",
  "files": [
@@ -11,12 +11,13 @@
  "losses": {
   "1997-2023": {
    "release_version": 1,
-   "variables": 25,
-   "availability": 230,
-   "provenance_fields": 158,
-   "missing_codes": 103,
-   "numeric_code_labels": 15,
-   "wordings": 5
+   "variables": 397,
+   "availability": 661,
+   "provenance_fields": 2393,
+   "missing_codes": 1895,
+   "numeric_code_labels": 386,
+   "wordings": 6,
+   "groups": 1
   }
  }
 }

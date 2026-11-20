@@ -1,0 +1,78 @@
+{
+ "pdt_version": "0.1.0",
+ "inputs_sha256": "9c0706538763e9a2648576a984d3bbe6cc5fb95c580f4f140843e839a6728dab",
+ "generator_sha256": "9ccfde4fa108cb2b4d7e1cdf675082febafe78bc8e89a2be78db6a98e3a26059",
+ "dataset": "nlsy97",
+ "max_tokens": 20000,
+ "shards": [
+  {
+   "kind": "table",
+   "title": "Release 1997-2023, table person",
+   "basis": "every variable in the table",
+   "full_records": [
+    "metadata/releases/1997-2023/person/variables.jsonl"
+   ],
+   "completeness": "complete",
+   "filter": {
+    "release": "1997-2023",
+    "table": "person"
+   },
+   "releases": [
+    "1997-2023"
+   ],
+   "n_in_scope": 8,
+   "rule_versions": {},
+   "notes": [],
+   "count": 8,
+   "files": [
+    {
+     "path": "shards/table/1997-2023-person.jsonl",
+     "form": "jsonl",
+     "variables": 8,
+     "tokens": 2966
+    },
+    {
+     "path": "shards/table/1997-2023-person.txt",
+     "form": "txt",
+     "variables": 8,
+     "tokens": 421
+    }
+   ]
+  },
+  {
+   "kind": "table",
+   "title": "Release 1997-2023, table person_year",
+   "basis": "every variable in the table",
+   "full_records": [
+    "metadata/releases/1997-2023/person_year/variables.jsonl"
+   ],
+   "completeness": "complete",
+   "filter": {
+    "release": "1997-2023",
+    "table": "person_year"
+   },
+   "releases": [
+    "1997-2023"
+   ],
+   "n_in_scope": 17,
+   "rule_versions": {},
+   "notes": [],
+   "count": 17,
+   "files": [
+    {
+     "path": "shards/table/1997-2023-person-year.jsonl",
+     "form": "jsonl",
+     "variables": 17,
+     "tokens": 9750
+    },
+    {
+     "path": "shards/table/1997-2023-person-year.txt",
+     "form": "txt",
+     "variables": 17,
+     "tokens": 990
+    }
+   ]
+  }
+ ],
+ "release_shards": 12
+}

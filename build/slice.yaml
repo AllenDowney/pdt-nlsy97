@@ -1,9 +1,41 @@
-# The variables to build, and facts the sources don't give (origin: hand).
-# Edited by hand; read by build/build_records.py.
+# The NLSY97 slice (PublicDataToolkit Task 65): the questions to build, and facts the
+# sources don't give (origin: hand). Edited by hand; read by build/build_records.py.
+#
+# One release, the 1997-2023 cohort file (rounds 1-21). The publisher's file is wide:
+# one column per reference number, each one question in one survey year. Here a record
+# is a question name (YHEA-100), its availability is by survey year, and source_columns
+# lists its reference number in each year (STANDARD.md §4.1). Two tables:
+# - person: one row per respondent, for questions asked once (the KEY! variables);
+# - person_year: one row per respondent and survey year (21 per person), for the rest.
+
+author: Claude (PublicDataToolkit Task 65)
+date: "2026-11-20"
 release: "1997-2023"
-# Start with 30-50 variables that include the hard cases: a battery, an item
-# asked on only some forms, several wordings, several kinds of missing codes,
-# and anything the publisher has corrected (instructions/03-parse-documentation.md).
-variables: {}
-#  name:
-#    measure: categorical   # categorical, ordinal, continuous, count, identifier, weight, text, date
+
+tables:
+  person:
+    PUBID: identifier
+    KEY!SEX: categorical
+    KEY!BDATE_M: categorical
+    KEY!BDATE_Y: categorical
+    KEY!RACE_ETHNICITY: categorical
+    CV_SAMPLE_TYPE: categorical
+    VSTRAT: categorical
+    VPSU: categorical
+  person_year:
+    PUBID: identifier
+    SAMPLING_WEIGHT_CC: weight
+    CV_HGC_EVER_EDT: ordinal
+    CV_INCOME_FAMILY: continuous
+    CV_MARSTAT_COLLAPSED: categorical      # Task 69: status as of each interview
+    CV_WKSWK_DLI_ALL: continuous           # Task 69: weeks worked since the last interview
+    YHEA-100: ordinal
+    YSAQ-282C: ordinal
+    YSAQ-282D: ordinal
+    YSAQ-282E: ordinal
+    YSAQ-282F: ordinal
+    YSAQ-282G: ordinal
+    YSAQ-359: categorical                  # Task 69: "ever smoked", asked in 6 rounds
+    YSAQ-360C: categorical                 # Task 69: "smoked since the last interview"
+    YSAQ-361: count
+    YSAQ-363: categorical

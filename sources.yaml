@@ -1,17 +1,34 @@
-# Every file this repo depends on (STANDARD.md §2.2): data files, codebooks,
-# questionnaires, release notes, errata and terms pages, upstream packages.
-# Schema: PublicDataToolkit/schema/sources.schema.json. Edited by hand.
-#
-# Once a file is fetched, fill fetched_on, bytes and sha256 (pdt check C6).
-# An upstream package also needs `version` (a tag or commit), and documentation
-# says which releases it `documents`.
+# Every file this repo depends on (STANDARD.md §2.2). Edited by hand.
+# The codebook is a member of the data zip, so the two sources share a path and checksum.
 sources:
-  - id: nlsy97-all-1997-2023
-    title: "NLSY97 cohort data, 1997-2023 (rounds 1-21), data"
-    kind: data
-    format: csv
-    url: "https://nlsinfo.org/cohort-data/nlsy97_all_1997-2023.zip"
-    path: data/raw/CHANGE-ME
-    releases: ["1997-2023"]
-    redistribution: unknown
-    acquisition: automated
+- id: nlsy97-all-1997-2023
+  title: 'NLSY97 cohort data, 1997-2023 (rounds 1-21): the whole-cohort download'
+  kind: data
+  format: csv
+  url: https://nlsinfo.org/cohort-data/nlsy97_all_1997-2023.zip
+  path: data/raw/1997-2023/nlsy97_all_1997-2023.zip
+  releases:
+  - 1997-2023
+  redistribution: unknown
+  acquisition: automated
+  fetched_on: '2026-11-20'
+  sha256: 8c513e4804e5b07fce0e6b913258747dcf8707c73bb9ae54cce88dbff6d23c28
+  bytes: 475462343
+  note: 'A zip of 475 MB (Last-Modified 2026-01-23): nlsy97_all_1997-2023.csv (8.1 GB, 8,984 rows x 305,325 reference-number
+    columns), the same as .dat, the codebook (.cdb), SAS and R read programs, and the tagset (.NLSY97). scripts/extract_slice.py
+    copies the slice''s columns.'
+- id: nlsy97-codebook
+  title: NLSY97 1997-2023 codebook (nlsy97_all_1997-2023.cdb, in the cohort zip)
+  kind: codebook
+  format: text
+  url: https://nlsinfo.org/cohort-data/nlsy97_all_1997-2023.zip
+  path: data/raw/1997-2023/nlsy97_all_1997-2023.zip
+  releases:
+  - 1997-2023
+  redistribution: unknown
+  acquisition: automated
+  fetched_on: '2026-11-20'
+  sha256: 8c513e4804e5b07fce0e6b913258747dcf8707c73bb9ae54cce88dbff6d23c28
+  bytes: 475462343
+  note: 'The member nlsy97_all_1997-2023.cdb (329 MB): one entry per reference number, with the question name, survey
+    year, title, question text, universe, codes with counts, and counts of NLS''s reserved codes -1 to -5.'

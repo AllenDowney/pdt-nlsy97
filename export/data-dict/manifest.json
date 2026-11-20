@@ -1,0 +1,22 @@
+{
+ "pdt_version": "0.1.0",
+ "inputs_sha256": "9c0706538763e9a2648576a984d3bbe6cc5fb95c580f4f140843e839a6728dab",
+ "generator_sha256": "9ccfde4fa108cb2b4d7e1cdf675082febafe78bc8e89a2be78db6a98e3a26059",
+ "dataset": "nlsy97",
+ "spec": "0.1.0",
+ "files": [
+  "1997-2023.yaml",
+  "LOSSES.md"
+ ],
+ "losses": {
+  "1997-2023": {
+   "release_version": 1,
+   "variables": 25,
+   "availability": 230,
+   "provenance_fields": 158,
+   "missing_codes": 103,
+   "numeric_code_labels": 15,
+   "wordings": 5
+  }
+ }
+}

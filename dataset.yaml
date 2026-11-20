@@ -2,6 +2,7 @@
 # Schema: PublicDataToolkit/schema/dataset.schema.json. Edited by hand.
 standard_version: "0.1"
 id: nlsy97
+kind: survey   # STANDARD.md §2.1: survey, administrative or portal
 title: "National Longitudinal Survey of Youth 1997 (NLSY97)"
 publisher:
   name: "U.S. Bureau of Labor Statistics (BLS); produced and distributed by the Center for Human Resource Research (CHRR), The Ohio State University"
@@ -14,19 +15,77 @@ citation: "Bureau of Labor Statistics, U.S. Department of Labor. National Longit
 # to ship or build-only and fill reviewed_by and reviewed_on. `unknown` blocks
 # shipping anything that depends on it.
 terms:
-  url: "https://www.nlsinfo.org/system-use-notification"
-  summary: Not yet reviewed.
+  url: https://www.nlsinfo.org/content/getting-started/accessing-data
+  summary: 'PENDING: a person has not decided these terms. What NLS says (read 2026-11-20): public-use data are
+    available at no cost through the NLS Investigator, and whole-cohort files are posted for download (https://www.nlsinfo.org/content/access-data-investigator/accessing-data-cohorts);
+    "It is not necessary to get an account to browse data, but an account is necessary to save datasets online"
+    (https://www.nlsinfo.org/content/getting-started/accessing-data). The suggested citation is at https://www.nlsinfo.org/bibliography/citing-nls-data.
+    The site''s System Use Notification limits use of the Investigator to "intended, lawful purposes". No statement
+    about redistributing the public-use files was found. Geocode data are restricted (a separate application) and
+    aren''t used here.'
   data: unknown
   documentation: unknown
   metadata: unknown
   llm_processing: unknown
 dimensions:
   wave:
-    label: "round"
+    label: survey year
+    column: SURVEY_YEAR
+    values:
+    - 1997
+    - 1998
+    - 1999
+    - 2000
+    - 2001
+    - 2002
+    - 2003
+    - 2004
+    - 2005
+    - 2006
+    - 2007
+    - 2008
+    - 2009
+    - 2010
+    - 2011
+    - 2013
+    - 2015
+    - 2017
+    - 2019
+    - 2021
+    - 2023
+    note: 'Each survey year is one round: rounds 1-15 were annual (1997-2011), rounds 16-21 every two years (2013-2023).
+      Each codebook entry gives its survey year; a question asked each round has a different reference number (column)
+      in each.'
 releases:
-  - id: "1997-2023"
-    label: "NLSY97 cohort data, 1997-2023 (rounds 1-21)"
-    status: current
-    sources: [nlsy97-all-1997-2023]
-    # A release with several data files lists `tables`, each with an id, label,
-    # sources, key and references (STANDARD.md §2.1). Examples: pdt-nsfg, pdt-fars.
+- id: 1997-2023
+  label: NLSY97 cohort data, 1997-2023 (rounds 1-21)
+  status: current
+  sources:
+  - nlsy97-all-1997-2023
+  - nlsy97-codebook
+  tables:
+  - id: person
+    label: 'One row per respondent: questions asked once, and the sample design'
+    sources:
+    - nlsy97-all-1997-2023
+    - nlsy97-codebook
+    key:
+    - PUBID
+  - id: person_year
+    label: One row per respondent and survey year (21 rows each)
+    sources:
+    - nlsy97-all-1997-2023
+    - nlsy97-codebook
+    key:
+    - PUBID
+    - SURVEY_YEAR
+    references:
+    - columns:
+      - PUBID
+      table: person
+    design:
+      weights:
+      - SAMPLING_WEIGHT_CC
+      note: 'SAMPLING_WEIGHT_CC is each year''s cross-sectional weight (the codebook: ''ROUND n SAMPLING WEIGHT
+        CUMULATIVE CASES METHOD''), with 2 implied decimal places. The variance stratum and PSU, VSTRAT and VPSU,
+        are in the person table; join on PUBID. design can''t name strata or a PSU in another table.'

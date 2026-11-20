@@ -2,7 +2,7 @@
 
 Metadata for the [National Longitudinal Survey of Youth 1997 (NLSY97)](https://www.nlsinfo.org/content/cohorts/nlsy97), built to the [PublicDataToolkit](https://github.com/AllenDowney/PublicDataToolkit) standard.
 
-**Status:** a slice of 25 questions from the 1997–2023 cohort file (rounds 1–21), built locally. The terms haven't been decided, so nothing here ships yet.
+**Status:** a slice of 25 questions from the 1997–2023 cohort file (rounds 1–21), built locally. The terms are decided (everything ships), but nothing is published yet.
 
 <!-- The sections below are required, in this order (STANDARD.md §2.3; pdt check C11). Replace each placeholder. -->
 
@@ -21,7 +21,11 @@ A record is a question name. Its `availability` lists the years it was asked, `q
 
 ## Terms of use
 
-A person hasn't decided the terms yet, so nothing built from this repo may ship (STANDARD.md §8). NLS public-use data are free and posted for download; NLS asks to be cited (https://www.nlsinfo.org/bibliography/citing-nls-data). [`dataset.yaml`](dataset.yaml) quotes what NLS says.
+Allen Downey reviewed the terms on 2026-11-20: the metadata, the documentation and the common-format data ship, with this notice:
+
+> Source: Bureau of Labor Statistics, U.S. Department of Labor, National Longitudinal Survey of Youth 1997 cohort, public-use data, rounds 1-21. Cite as NLS suggests: https://www.nlsinfo.org/bibliography/citing-nls-data.
+
+NLS public-use data are free and posted for download; NLS asks to be cited (https://www.nlsinfo.org/bibliography/citing-nls-data). [`dataset.yaml`](dataset.yaml) quotes what NLS says.
 
 ## How to get the data
 

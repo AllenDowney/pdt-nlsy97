@@ -16,17 +16,20 @@ citation: "Bureau of Labor Statistics, U.S. Department of Labor. National Longit
 # shipping anything that depends on it.
 terms:
   url: https://www.nlsinfo.org/content/getting-started/accessing-data
-  summary: 'PENDING: a person has not decided these terms. What NLS says (read 2026-11-20): public-use data are
+  summary: 'What NLS says (read 2026-11-20): public-use data are
     available at no cost through the NLS Investigator, and whole-cohort files are posted for download (https://www.nlsinfo.org/content/access-data-investigator/accessing-data-cohorts);
     "It is not necessary to get an account to browse data, but an account is necessary to save datasets online"
     (https://www.nlsinfo.org/content/getting-started/accessing-data). The suggested citation is at https://www.nlsinfo.org/bibliography/citing-nls-data.
     The site''s System Use Notification limits use of the Investigator to "intended, lawful purposes". No statement
     about redistributing the public-use files was found. Geocode data are restricted (a separate application) and
     aren''t used here.'
-  data: unknown
-  documentation: unknown
-  metadata: unknown
-  llm_processing: unknown
+  data: ship
+  documentation: ship
+  metadata: ship
+  llm_processing: allowed
+  reviewed_by: Allen Downey
+  reviewed_on: '2026-11-20'
+  notice: "Source: Bureau of Labor Statistics, U.S. Department of Labor, National Longitudinal Survey of Youth 1997 cohort, public-use data, rounds 1-21. Cite as NLS suggests: https://www.nlsinfo.org/bibliography/citing-nls-data."
 dimensions:
   wave:
     label: survey year

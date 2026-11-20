@@ -2,7 +2,7 @@
 """Copy the slice's columns out of the 8.1 GB NLSY97 CSV into data/interim/slice_wide.csv.
 
 The columns are the reference numbers of every codebook entry whose question name is in
-build/slice.yaml (data/interim/slice.cdb, written by build/build_records.py). Cells are kept
+build/slice.yaml (data/interim/slice.cdb, copied from the codebook first). Cells are kept
 as text, exactly as written. Read in row chunks; run under the memory cap (CLAUDE.md).
 """
 
@@ -21,6 +21,11 @@ OUT = ROOT / "data/interim/slice_wide.csv"
 
 
 def columns():
+    sys.path.insert(0, str(ROOT / "build"))
+    import yaml
+    from build_records import slice_cdb  # copies the slice's codebook entries to data/interim/slice.cdb
+    spec = yaml.safe_load((ROOT / "build/slice.yaml").read_text())
+    slice_cdb({n for t in spec["tables"].values() for n in t})
     heads = re.findall(r"^([A-Z]\d{5})\.(\d{2}) +\[", (ROOT / "data/interim/slice.cdb").read_text(), re.M)
     return [a + b for a, b in heads]
 

@@ -29,8 +29,7 @@ The files are listed in [`sources.yaml`](sources.yaml), with where to get each a
 
 ```bash
 make download ARGS=--accept-terms
-make build       # also copies the slice's codebook entries into data/interim
-make extract     # the slice's columns, about 5 minutes
+make extract     # the slice's codebook entries and columns into data/interim, about 5 minutes
 make build
 make data
 ```
